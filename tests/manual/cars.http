@@ -27,3 +27,6 @@ content-type: application/json
 
 PUT  {{endpoint}}/sillycarID HTTP/3.0
 content-type: application/json
+
+{ "test" : "post test"
+  }

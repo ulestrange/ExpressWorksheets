@@ -4,7 +4,9 @@ const PORT = process.env.PORT || 3001;
 
 const app: Application = express();
 
-app.use((req, _res, next) => {  
+app.use(express.json());
+
+app.use((req, _res, next) => {
     console.log(`${req.method} ${req.originalUrl}`);
     next();
 });
