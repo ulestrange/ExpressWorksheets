@@ -1,5 +1,5 @@
 import express, {Application, Request, Response} from "express" ;
-
+import carRoutes from './routes/cars'
 const PORT = process.env.PORT || 3001;
 
 const app: Application = express();
@@ -20,6 +20,8 @@ app.get('/bananas', async (_req : Request, res: Response) => {
     message: "this is bananas",
     });
 });
+
+app.use('/api/v1/cars', carRoutes);
 
 
 app.listen(PORT, () => {
