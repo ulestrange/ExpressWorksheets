@@ -1,10 +1,12 @@
 
 # npm
 node_modules
-package-lock.json
+# package-lock.json - removed this after advice - thanks
 *.log
 *.gz
 
 # build folder
 
 build
+
+
