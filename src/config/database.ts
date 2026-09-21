@@ -1,16 +1,13 @@
 
 import {env} from '../config/env';
 
-
-
 import mongoose from 'mongoose';
 
 const uri = env.mongoURI ;
-//const dbName = 'cardb';
 
 export const connectDB = async (): Promise<void> => {
   try {
-    console.log(`Connecting to MongoDB at ${uri}`);
+    console.log(`Connecting to MongoDB at `);
     const conn = await mongoose.connect(uri);
     console.log(`MongoDB Connected (Mongoose): ${conn.connection.host}`);
   } catch (error) {
