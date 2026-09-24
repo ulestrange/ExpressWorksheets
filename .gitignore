@@ -12,3 +12,7 @@ build
 .env
 
 
+# env files
+.env
+
+
