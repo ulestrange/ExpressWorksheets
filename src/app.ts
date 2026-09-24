@@ -29,7 +29,7 @@ app.get('/bananas', logRequest, async (_req : Request, res: Response) => {
     });
 });
 
-app.use('/api/v1/cars', authenticateKey, carRoutes);
+app.use('/api/v1/cars',  carRoutes);
 
 
 const startServer = async () => {
