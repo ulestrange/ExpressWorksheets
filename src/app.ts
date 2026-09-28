@@ -2,7 +2,7 @@ import express, {Application, Request, Response} from "express" ;
 import carRoutes from './routes/cars'
 import {env} from './config/env';
 import { connectDB } from "./config/database";
-import { authenticateKey } from "./middleware/auth.middleware";
+//import { authenticateKey } from "./middleware/auth.middleware";
 import { logRequest } from "./middleware/logging.middleware";
 
 const port = env.port

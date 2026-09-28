@@ -7,9 +7,10 @@ POST {{endpoint}} HTTP/1.1
 content-type: application/json
 
 { 
-  "make": "mymake",
+
 "model" : "model2",
 "check": "check2"
+
 
   }
 
