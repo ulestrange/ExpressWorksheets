@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { CarService } from '../services/cars';
+import { createCarZSchema } from '../models/cars';
 
 
 const carService = new CarService();
@@ -8,6 +9,8 @@ export class CarController {
 
 
   getCars = async (_req: Request, res: Response): Promise<void> => {
+
+
 
     try {
       const cars = await carService.getAllCars();
@@ -34,6 +37,16 @@ export class CarController {
 
   createCar = async (req: Request, res: Response): Promise<void> => {
     try {
+
+      const validation = createCarZSchema.safeParse(req.body);
+
+      console.log
+
+      if (!validation.success) {
+        res.status(400).json({ message: 'Invalid car data', errors: validation.error.issues });
+        return;
+      }
+
       const newCar = await carService.createCar(req.body);
       res.status(201).json(newCar);
     } catch (error) {
@@ -67,8 +80,7 @@ export class CarController {
     } catch (error) {
       res.status(500).json({ message: 'Error deleting car' });
 
-      if (error instanceof Error)  
-        {console.error('Error deleting car:', error.message);}
+      if (error instanceof Error) { console.error('Error deleting car:', error.message); }
       else {
         console.error('Error deleting car:', error);
       }

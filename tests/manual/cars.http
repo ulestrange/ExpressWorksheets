@@ -6,8 +6,11 @@
 POST {{endpoint}} HTTP/1.1
 content-type: application/json
 
-{ "make" : "make2",
-"model" : "model2"
+{ 
+  "make": "mymake",
+"model" : "model2",
+"check": "check2"
+
   }
 
 ###
@@ -15,7 +18,7 @@ content-type: application/json
 @newCar = {{postACar.response.body._id}}
 
 ###
-GET  {{endpoint}}/{{newCar}} HTTP/3.0
+GET  {{endpoint}} HTTP/3.0
 content-type: application/json
 
 ###

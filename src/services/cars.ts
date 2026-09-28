@@ -16,6 +16,7 @@ export class CarService {
   }
 
   async createCar(carData: ICar): Promise<HydratedDocument<ICar>> {
+    console.log('here we are in the service layer');
     const car = new CarModel(carData);
     return await car.save();
   }
