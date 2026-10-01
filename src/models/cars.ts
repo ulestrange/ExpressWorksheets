@@ -1,20 +1,20 @@
 import { Schema, model } from 'mongoose';
-import { z} from 'zod';
+import { z } from 'zod';
+
+import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
+ 
+extendZodWithOpenApi(z);
 
 
 export const createCarZSchema = z.object({
   make: z.string().min(1),
   model: z.string().min(1),
   year: z.number().min(1950).optional(),
-});
+}).openapi("CreateCarInput");
 
 
-export interface ICar {
-  make: string;
-  model: string;
-  year?: number;
 
-}
+export type CreateCarInput = z.infer<typeof createCarZSchema>;
 
 
 const carSchema = new Schema<ICar>(
@@ -25,6 +25,14 @@ const carSchema = new Schema<ICar>(
   },
   { timestamps: true }
 );
+
+
+export interface ICar {
+  make: string;
+  model: string;
+  year?: number;
+
+}
 
 
 export const CarModel = model<ICar>('Car', carSchema);
