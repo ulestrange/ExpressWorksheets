@@ -4,6 +4,8 @@ import {env} from './config/env';
 import { connectDB } from "./config/database";
 //import { authenticateKey } from "./middleware/auth.middleware";
 import { logRequest } from "./middleware/logging.middleware";
+import { swaggerSpec } from "./config/swagger";
+import swaggerUi from 'swagger-ui-express';
 
 const port = env.port
 
@@ -11,6 +13,11 @@ const app: Application = express();
 
 app.use(express.json());
 
+app.use(
+'/api-docs',
+swaggerUi.serve,
+swaggerUi.setup(swaggerSpec)
+);
 
 
 // Middleware to authenticate API key
@@ -30,6 +37,10 @@ app.get('/bananas', logRequest, async (_req : Request, res: Response) => {
 });
 
 app.use('/api/v1/cars',  carRoutes);
+
+app.get('/api-docs.json', (_req, res) => {
+res.json(swaggerSpec);
+});
 
 
 const startServer = async () => {

@@ -1,20 +1,36 @@
 import { Schema, model } from 'mongoose';
 import { z } from 'zod';
 
-import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
- 
-extendZodWithOpenApi(z);
 
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     CreateCarInput:
+ *       type: object
+ *       required:
+ *         - make
+ *         - model
+ *       properties:
+ *         make:
+ *           type: string
+ *           example: Renault
+ *         model:
+ *           type: string
+ *           example: Megane
+ *         year:
+ *           type: integer
+ *           example: 2010
+ */
+ 
 
 export const createCarZSchema = z.object({
   make: z.string().min(1),
   model: z.string().min(1),
   year: z.number().min(1950).optional(),
-}).openapi("CreateCarInput");
+});
 
 
-
-export type CreateCarInput = z.infer<typeof createCarZSchema>;
 
 
 const carSchema = new Schema<ICar>(

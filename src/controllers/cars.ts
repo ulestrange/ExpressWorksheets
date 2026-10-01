@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { CarService } from '../services/cars';
-import { createCarZSchema } from '../models/cars';
+
 
 
 const carService = new CarService();
@@ -15,6 +15,8 @@ export class CarController {
  *     summary: Retrieve all cars
  *     tags:
  *       - Cars
+ *     security:
+ *       - ApiKeyAuth: []
  *     responses:
  *       200:
  *         description: Successfully retrieved cars
@@ -85,7 +87,8 @@ export class CarController {
  *       required: true
  *       content:
  *         application/json:
- *           schema: CreateCarZSchema   
+ *           schema:
+ *             $ref: '#/components/schemas/CreateCarInput'
  *     responses:
  *       201:
  *         description: Successfully created car
