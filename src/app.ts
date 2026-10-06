@@ -25,8 +25,9 @@ swaggerUi.setup(swaggerSpec)
 //app.use(authenticateKey);
 
 app.get("/ping", async (_req : Request, res: Response) => {
+    console.log("Received request to /ping");
     res.json({
-    message: "hello from Una dfdsfa",
+    message: "hello from Una",
     });
 });
 

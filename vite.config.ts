@@ -4,7 +4,9 @@ export default defineConfig({
   test: {
     globals: true, // Enables global test functions like describe, it, expect without importing them
     environment: 'node',
-    clearMocks: true,
-    restoreMocks: true,
+    setupFiles: './tests/setup.ts', // Path to the setup file
+ 
+    // clearMocks: true,
+    // restoreMocks: true,
   },
 });
