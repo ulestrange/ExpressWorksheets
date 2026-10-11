@@ -11,8 +11,10 @@ export class CarService {
     return await CarModel.find().lean(); 
   }
 
-  async getCarById(id: string): Promise<ICar | null> {
-    return await CarModel.findById(id).lean();
+  async getCarById(id: string): Promise<ICar> {
+    const car = await CarModel.findById(id).lean();
+    if (!car) throw new Error('Car not found');
+    return car;
   }
 
   async createCar(carData: ICar): Promise<HydratedDocument<ICar>> {
@@ -27,5 +29,5 @@ export class CarService {
 
   async deleteCar(id: string): Promise<ICar | null> {
     return await CarModel.findByIdAndDelete(id).lean();
-  }
+     }   
 }

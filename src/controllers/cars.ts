@@ -63,7 +63,7 @@ export class CarController {
 
 
   getCarById = async (req: Request, res: Response): Promise<void> => {
-    try {
+
       const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
       const car = await carService.getCarById(id);
       if (!car) {
@@ -71,9 +71,7 @@ export class CarController {
         return;
       }
       res.status(200).json(car);
-    } catch (error) {
-      res.status(500).json({ message: 'Error fetching car', error });
-    }
+
   };
 
   /**
@@ -99,17 +97,14 @@ export class CarController {
  */
 
   createCar = async (req: Request, res: Response): Promise<void> => {
-    try {
+
 
       const newCar = await carService.createCar(req.body);
       res.status(201).json(newCar);
-    } catch (error) {
-      res.status(500).json({ message: 'Error inserting into MongoDB', error });
-    }
-  };
+    } 
 
   updateCar = async (req: Request, res: Response): Promise<void> => {
-    try {
+
       const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
       const updatedCar = await carService.updateCar(id, req.body);
       if (!updatedCar) {
@@ -117,13 +112,11 @@ export class CarController {
         return;
       }
       res.status(200).json(updatedCar);
-    } catch (error) {
-      res.status(500).json({ message: 'Error updating car', error });
-    }
+    
   };
 
   deleteCar = async (req: Request, res: Response): Promise<void> => {
-    try {
+
       const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
       const deletedCar = await carService.deleteCar(id);
       if (!deletedCar) {
@@ -131,14 +124,7 @@ export class CarController {
         return;
       }
       res.status(204).send();
-    } catch (error) {
-      res.status(500).json({ message: 'Error deleting car' });
-
-      if (error instanceof Error) { console.error('Error deleting car:', error.message); }
-      else {
-        console.error('Error deleting car:', error);
-      }
-    }
+    
   };
 
 }
