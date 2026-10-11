@@ -3,6 +3,7 @@ import { CarService } from '../services/cars';
 
 
 
+
 const carService = new CarService();
 
 export class CarController {
@@ -29,14 +30,9 @@ export class CarController {
 
   getCars = async (_req: Request, res: Response): Promise<void> => {
 
-
-
-    try {
       const cars = await carService.getAllCars();
       res.status(200).json(cars);
-    } catch (error) {
-      res.status(500).json({ message: 'Error fetching cars', error });
-    }
+
   };
 
   /**
@@ -66,10 +62,9 @@ export class CarController {
 
       const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
       const car = await carService.getCarById(id);
-      if (!car) {
-        res.status(404).json({ message: 'Car not found' });
-        return;
-      }
+
+
+
       res.status(200).json(car);
 
   };
@@ -100,6 +95,7 @@ export class CarController {
 
 
       const newCar = await carService.createCar(req.body);
+
       res.status(201).json(newCar);
     } 
 
@@ -107,10 +103,8 @@ export class CarController {
 
       const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
       const updatedCar = await carService.updateCar(id, req.body);
-      if (!updatedCar) {
-        res.status(404).json({ message: 'Car not found' });
-        return;
-      }
+
+
       res.status(200).json(updatedCar);
     
   };
@@ -118,11 +112,9 @@ export class CarController {
   deleteCar = async (req: Request, res: Response): Promise<void> => {
 
       const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
-      const deletedCar = await carService.deleteCar(id);
-      if (!deletedCar) {
-        res.status(404).json({ message: 'Car not found' });
-        return;
-      }
+     await carService.deleteCar(id);
+
+
       res.status(204).send();
     
   };

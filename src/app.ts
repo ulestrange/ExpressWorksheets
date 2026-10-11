@@ -6,6 +6,7 @@ import carRoutes from './routes/cars'
 import { logRequest } from "./middleware/logging.middleware";
 import { swaggerSpec } from "./config/swagger";
 import swaggerUi from 'swagger-ui-express';
+import { errorHandler } from "./middleware/errors.middleware";
 
 
 
@@ -43,4 +44,4 @@ app.get('/api-docs.json', (_req, res) => {
 res.json(swaggerSpec);
 });
 
-
+app.use(errorHandler)

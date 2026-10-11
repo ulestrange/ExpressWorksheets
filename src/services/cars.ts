@@ -1,5 +1,6 @@
 import { CarModel, ICar } from '../models/cars'
 import { HydratedDocument } from 'mongoose';
+import { NotFoundError } from '../utils/errors';
 
 
 export class CarService {
@@ -13,21 +14,24 @@ export class CarService {
 
   async getCarById(id: string): Promise<ICar> {
     const car = await CarModel.findById(id).lean();
-    if (!car) throw new Error('Car not found');
+    if (!car) throw new NotFoundError('Car');
     return car;
   }
 
   async createCar(carData: ICar): Promise<HydratedDocument<ICar>> {
-    console.log('here we are in the service layer');
     const car = new CarModel(carData);
     return await car.save();
   }
 
-  async updateCar(id: string, carData: Partial<ICar>): Promise<ICar | null> {
-    return await CarModel.findByIdAndUpdate(id, carData, { returnDocument: 'after' }).lean();
+  async updateCar(id: string, carData: Partial<ICar>): Promise<ICar > {
+    const car = await CarModel.findByIdAndUpdate(id, carData, { returnDocument: 'after' }).lean();
+     if (!car) throw new NotFoundError('Car');
+    return car
   }
 
-  async deleteCar(id: string): Promise<ICar | null> {
-    return await CarModel.findByIdAndDelete(id).lean();
-     }   
+  async deleteCar(id: string): Promise<ICar> {
+    const car = await CarModel.findByIdAndDelete(id).lean();
+    if (!car) throw new NotFoundError('Car');
+    return car;
+  }
 }
