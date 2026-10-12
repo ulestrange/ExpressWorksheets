@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import mongoose, { Schema, model } from 'mongoose';
 import { z } from 'zod';
 
 
@@ -22,7 +22,7 @@ import { z } from 'zod';
  *           type: integer
  *           example: 2010
  */
- 
+
 
 export const createCarZSchema = z.object({
   make: z.string().min(1),
@@ -30,6 +30,22 @@ export const createCarZSchema = z.object({
   year: z.number().min(1950).optional(),
 });
 
+export const updateCarZSchema = z.object({
+  make: z.string().min(1),
+  model: z.string().min(1),
+  year: z.number().min(1950).optional(),
+});
+
+export const getCarParamsSchema = z.object({
+  params: z.object({
+    id: z
+      .string()
+      .refine(
+        (id) => mongoose.Types.ObjectId.isValid(id),
+        { message: 'Invalid ObjectId' }
+      )
+  })
+});
 
 
 
@@ -37,7 +53,7 @@ const carSchema = new Schema<ICar>(
   {
     make: { type: String, required: true },
     model: { type: String, required: true },
-    year: { type: Number,  min: 1950 },
+    year: { type: Number, min: 1950 },
   },
   { timestamps: true }
 );

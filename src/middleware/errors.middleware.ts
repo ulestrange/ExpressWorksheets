@@ -4,7 +4,7 @@ import { AppError, ValidationError } from "../utils/apperrors";
 export const errorHandler = (err: Error, _req: Request, res: Response, _next: NextFunction) => {
   
 
-  console.error(`Customer middleware: ${err}`);
+  console.error(`Custome middleware: ${err}`);
 
   if (err instanceof ValidationError) {
   res.status(400).json({
