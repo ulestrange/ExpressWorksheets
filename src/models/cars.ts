@@ -1,4 +1,4 @@
-import mongoose, { Schema, model } from 'mongoose';
+import { Schema, model } from 'mongoose';
 import { z } from 'zod';
 
 
@@ -25,25 +25,26 @@ import { z } from 'zod';
 
 
 export const createCarZSchema = z.object({
-  make: z.string().min(1),
-  model: z.string().min(1),
-  year: z.number().min(1950).optional(),
+  body: z.object({
+    make: z.string().min(1),
+    model: z.string().min(1),
+    year: z.number().min(1950).optional(),
+  }),
 });
 
 export const updateCarZSchema = z.object({
-  make: z.string().min(1),
-  model: z.string().min(1),
-  year: z.number().min(1950).optional(),
+  body: z.object({
+    make: z.string().min(1),
+    model: z.string().min(1),
+    year: z.number().min(1950).optional(),
+  }),
 });
 
-export const getCarParamsSchema = z.object({
+export const carParamsSchema = z.object({
   params: z.object({
     id: z
       .string()
-      .refine(
-        (id) => mongoose.Types.ObjectId.isValid(id),
-        { message: 'Invalid ObjectId' }
-      )
+      .regex(/^[0-9a-fA-F]{24}$/, 'Invalid ObjectId')
   })
 });
 

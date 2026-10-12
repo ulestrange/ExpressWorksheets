@@ -9,7 +9,11 @@ export const validate = (schema: z.ZodObject<any>) => (
 ): void => {
 
 
-  const validation = schema.safeParse(req.body);
+  const validation = schema.safeParse({
+      body: req.body,
+      params: req.params,
+      query: req.query
+    });
 
   if (!validation.success) {
 
@@ -18,7 +22,8 @@ export const validate = (schema: z.ZodObject<any>) => (
     return;
   }
 
-  req.body = validation.data
+  req.body = validation.data.body;
+
 
   next();
 };

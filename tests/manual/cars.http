@@ -6,11 +6,11 @@
 POST {{endpoint}} HTTP/1.1
 content-type: application/json
 
-{ 
-"model" : "model2",
-"make": "check2",
-"year": 56
-  }
+{
+    "make": "Una",
+    "model": "0871234567",
+    "year": 89
+}
 
 ###
 
@@ -21,14 +21,16 @@ GET  {{endpoint}} HTTP/3.0
 content-type: application/json
 
 ###
-GET  {{endpoint}}/6ab5010creqrecdbda2f6718ff4fd HTTP/3.0
+GET  {{endpoint}}/6ab5014acdbda2f6718ff4fe HTTP/3.0
 content-type: application/json
 
-
+###
+GET  {{endpoint}}/6ab5014acdbda2f6718f4fe HTTP/3.0
+content-type: application/json
 
 ###
 
-DELETE  {{endpoint}}/6ab5010ccdbda2f6718ff4fd HTTP/3.0
+DELETE  {{endpoint}}/6ab5014acdbdaf6718ff4fe HTTP/3.0
 content-type: application/json
 
 ###
@@ -38,7 +40,7 @@ content-type: application/json
 
 ###
 
-PUT  {{endpoint}}/6ab10951cdd48f3013b6505 HTTP/3.0
+PUT  {{endpoint}}/6ab5010ccdbda2f6718ff4fd HTTP/3.0
 content-type: application/json
 
 { "model" : "changed model"
