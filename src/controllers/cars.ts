@@ -62,11 +62,7 @@ export class CarController {
 
       const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
       const car = await carService.getCarById(id);
-
-
-
       res.status(200).json(car);
-
   };
 
   /**

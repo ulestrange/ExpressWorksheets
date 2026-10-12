@@ -1,8 +1,11 @@
 import { NextFunction, Request, Response } from "express";
-import { AppError, ValidationError } from "../utils/errors";
+import { AppError, ValidationError } from "../utils/apperrors";
 
 export const errorHandler = (err: Error, _req: Request, res: Response, _next: NextFunction) => {
   
+
+  console.error(`Customer middleware: ${err}`);
+
   if (err instanceof ValidationError) {
   res.status(400).json({
     success: false,
@@ -20,8 +23,10 @@ export const errorHandler = (err: Error, _req: Request, res: Response, _next: Ne
         message: err.message
     });
 
+  return;
 }
   
-  console.error(err);
-  res.status(500).send({ errors: [{ message: "Something went wrong" }] });
+
+  res.status(500).json({ error: 'error',
+        message: 'Server Error' });
 };
