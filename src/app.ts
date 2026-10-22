@@ -7,11 +7,12 @@ import { logRequest } from "./middleware/logging.middleware";
 import { swaggerSpec } from "./config/swagger";
 import swaggerUi from 'swagger-ui-express';
 import { errorHandler } from "./middleware/errors.middleware";
-
+import cors from 'cors';
 
 
 export const app: Application = express();
 
+app.use(cors())
 app.use(express.json());
 
 app.use(
