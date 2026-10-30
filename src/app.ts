@@ -1,5 +1,6 @@
 import express, {Application, Request, Response} from "express" ;
 import carRoutes from './routes/cars'
+import cors from 'cors';
 
 
 //import { authenticateKey } from "./middleware/auth.middleware";
@@ -13,6 +14,7 @@ import { errorHandler } from "./middleware/errors.middleware";
 export const app: Application = express();
 
 app.use(express.json());
+app.use(cors())
 
 app.use(
 '/api-docs',
