@@ -38,6 +38,11 @@ export const updateCarZSchema = z.object({
     model: z.string().min(1),
     year: z.number().min(1950).optional(),
   }),
+  params: z.object({
+    id: z
+      .string()
+      .regex(/^[0-9a-fA-F]{24}$/, 'Invalid ObjectId')
+  })
 });
 
 export const carParamsSchema = z.object({

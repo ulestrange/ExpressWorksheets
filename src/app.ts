@@ -27,6 +27,11 @@ swaggerUi.setup(swaggerSpec)
 
 //app.use(authenticateKey);
 
+// Special code to add a delay - remove later
+
+app.use((_req, _res, next) => setTimeout(next, 2000));
+
+
 app.get("/ping", async (_req : Request, res: Response) => {
     console.log("Received request to /ping");
     res.json({
